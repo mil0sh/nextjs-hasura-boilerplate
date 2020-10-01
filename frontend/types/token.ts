@@ -3,4 +3,6 @@ export default interface iToken {
   email: string;
   name: string;
   picture: string;
+  role: string;
+  title: string;
 }

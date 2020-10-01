@@ -7,7 +7,7 @@ const IndexPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Index Page</title>
+        <title>Vet Planet App</title>
       </Head>
       <Page />
     </>

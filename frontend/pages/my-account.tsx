@@ -16,7 +16,7 @@ const MyAccountPage: InferGetServerSidePropsType<typeof getServerSideProps> = ({
   return (
     <WithGraphQL session={session}>
       <Head>
-        <title>My Account Page</title>
+        <title>Moj Profil</title>
       </Head>
       <Page />
     </WithGraphQL>

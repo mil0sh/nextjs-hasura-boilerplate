@@ -15,6 +15,7 @@ import {
   AlertIcon,
   AlertTitle,
   CloseButton,
+  Text,
 } from "@chakra-ui/core";
 import Loader from "components/loader";
 import { useSession } from "next-auth/client";
@@ -24,16 +25,27 @@ const usersQuery = gql`
     users_by_pk(id: $userId) {
       id
       name
+      role
+      title
     }
   }
 `;
 
 const updateUserMutation = gql`
-  mutation updateUser($userId: uuid!, $name: String) {
-    update_users(where: { id: { _eq: $userId } }, _set: { name: $name }) {
+  mutation updateUser(
+    $userId: uuid!
+    $name: String
+    $role: String
+    $title: String
+  ) {
+    update_users(
+      where: { id: { _eq: $userId } }
+      _set: { name: $name, role: $role, title: $title }
+    ) {
       returning {
         id
         name
+        role
       }
     }
   }
@@ -44,6 +56,8 @@ const MyAccountPageComponent = () => {
   const bgColor = { light: "white", dark: "gray.800" };
   const color = { light: "gray.800", dark: "gray.100" };
   const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const [title, setTitle] = useState("");
   const [session] = useSession();
 
   const [
@@ -58,8 +72,12 @@ const MyAccountPageComponent = () => {
   useEffect(() => {
     if (fetchUserData) {
       const { name } = fetchUserData.users_by_pk;
+      const { role } = fetchUserData.users_by_pk;
+      const { title } = fetchUserData.users_by_pk;
 
       setName(name || "");
+      setRole(role || "");
+      setTitle(title || "");
     }
   }, [fetchUserData]);
 
@@ -80,6 +98,8 @@ const MyAccountPageComponent = () => {
     updateUser({
       userId: session.id,
       name,
+      role,
+      title,
     });
   };
 
@@ -99,8 +119,9 @@ const MyAccountPageComponent = () => {
 
   return (
     <Stack spacing={4}>
-      <Heading color={color[colorMode]}>My Account</Heading>
+      <Heading color={color[colorMode]}>Moj Profil</Heading>
       {errorNode()}
+      <Text>{session.user.name}</Text>
       <Grid templateColumns="repeat(1, 1fr)" gap={4}>
         <Box
           p={4}
@@ -118,6 +139,30 @@ const MyAccountPageComponent = () => {
                 value={name}
                 onChange={(e: FormEvent<HTMLInputElement>) =>
                   setName(e.currentTarget.value)
+                }
+                isDisabled={updateUserFetching}
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="title">Titula</FormLabel>
+              <Input
+                type="text"
+                id="title"
+                value={title}
+                onChange={(e: FormEvent<HTMLInputElement>) =>
+                  setTitle(e.currentTarget.value)
+                }
+                isDisabled={updateUserFetching}
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="role">Role</FormLabel>
+              <Input
+                type="text"
+                id="role"
+                value={role}
+                onChange={(e: FormEvent<HTMLInputElement>) =>
+                  setRole(e.currentTarget.value)
                 }
                 isDisabled={updateUserFetching}
               />

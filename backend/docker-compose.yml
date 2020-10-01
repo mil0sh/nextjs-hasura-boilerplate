@@ -10,8 +10,10 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://postgres:@db:5432/postgres
-      HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS256", "key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0U3NR0eyMehHBlx6DK5s\nJ+Pys9dTWf558kpKVeQvL2oIZEY3LvS3/jdrIm/dU4WrIGPki1r/AWXQAyBZ2FKn\nZROcUWN0IqdmxrC5zTDymuscqhKXqxjSwrwOVWHc+zWWmXCQGmDdoCokXd9ZW66n\nA0BN66MdMC2+d5GrZdKUF305dpzTUdzDE12/XwOEUalCM0703eGu8zFwutLYc3+v\nf2CFOQ1z+rvDQD4N2aZABKTxZRtEkMHljnoyKlF9rljNzT/5N8YQE7qn4pBh6CMa\n1zcSilk9nhgl55n/Kjn2xMieWdIalaOEKw1LqqIjiT1ESkAKfPaIoSSnmTaYy78g\nbwIDAQAB\n-----END PUBLIC KEY-----\n"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS256", "key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvZNTD+2pqUFyhlN6oTkM\nUAumAXAW9uEybmUd592WurqUYAri8100fXM8JrAJ1GCAKeLR95NXtuT3Pum/27nr\n3FWvXqe/qamR80m+tshte11ydXczjHfiuVXVqTrGPfIgRPaSFR46oynWlMwhrH5i\n/YogTzBPbjXjfStjRKxdAlm1y0dSeODd6KmMcKvTvkQdPSlHILeYMZkrM0mNjcg7\nJeZqzzycsCiz3xT0juEsN/Ag9KWZp1Mar3NcxVXAC84I8A/0vLZ4OH19rl2ZHPkZ\nRKLZbocZCK3dKHBUFBGdxAdKoITBuacbFg5Zs5UudjJihVUU/vkpEBgIkI/2jJut\nGwIDAQAB\n-----END PUBLIC KEY-----\n"}'
       HASURA_GRAPHQL_ADMIN_SECRET: secret
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
       PORT: 8080
     ports:
       - "8080:8080"
@@ -23,7 +25,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - ./db_data:/var/lib/postgresql/data
     restart: unless-stopped
 
 volumes:

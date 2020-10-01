@@ -25,7 +25,10 @@ const Feed: FC<IProps> = ({ feed }) => {
       >
         <Avatar name={feed.author.name} src={feed.author.image} />
         <Stack>
-          <Text fontWeight="bold">{feed.author.name}</Text>
+          <Text fontWeight="bold" mb={0}>
+            {feed.author.name}
+          </Text>
+          <Text>{feed.author.title}</Text>
           <Text>{timeFromNow(feed.created_at)}</Text>
         </Stack>
       </Stack>

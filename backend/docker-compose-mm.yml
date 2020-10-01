@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  backend:
+    container_name: nextjs-hasura-boilerplate-backend
+    image: hasura/graphql-engine:v1.3.2
+    depends_on:
+      - postgres
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS256", "key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvZNTD+2pqUFyhlN6oTkM\nUAumAXAW9uEybmUd592WurqUYAri8100fXM8JrAJ1GCAKeLR95NXtuT3Pum/27nr\n3FWvXqe/qamR80m+tshte11ydXczjHfiuVXVqTrGPfIgRPaSFR46oynWlMwhrH5i\n/YogTzBPbjXjfStjRKxdAlm1y0dSeODd6KmMcKvTvkQdPSlHILeYMZkrM0mNjcg7\nJeZqzzycsCiz3xT0juEsN/Ag9KWZp1Mar3NcxVXAC84I8A/0vLZ4OH19rl2ZHPkZ\nRKLZbocZCK3dKHBUFBGdxAdKoITBuacbFg5Zs5UudjJihVUU/vkpEBgIkI/2jJut\nGwIDAQAB\n-----END PUBLIC KEY-----\n"}'
+      HASURA_GRAPHQL_ADMIN_SECRET: secret
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    restart: on-failure
+  postgres:
+    image: postgres:12
+    restart: always
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+volumes:
+  db_data:

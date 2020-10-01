@@ -38,8 +38,13 @@ const Navbar: NextComponentType = () => {
       href: "/feeds",
     },
     {
+      id: "breeds",
+      label: "Rase",
+      href: "/breeds",
+    },
+    {
       id: "myAccount",
-      label: "My Account",
+      label: "Moj Profil",
       href: "/my-account",
     },
   ];
@@ -58,7 +63,7 @@ const Navbar: NextComponentType = () => {
               signIn();
             }}
           >
-            Sign In
+            Prijava
           </Button>
         </Link>
       </Box>
@@ -79,7 +84,7 @@ const Navbar: NextComponentType = () => {
               signOut();
             }}
           >
-            Sign Out
+            Odjava
           </Button>
         </Link>
       </Box>

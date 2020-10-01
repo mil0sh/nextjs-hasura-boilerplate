@@ -3,6 +3,24 @@
     name: accounts
 - table:
     schema: public
+    name: animal_types
+  array_relationships:
+  - name: breeds
+    using:
+      foreign_key_constraint_on:
+        column: animal_type
+        table:
+          schema: public
+          name: breeds
+- table:
+    schema: public
+    name: breeds
+  object_relationships:
+  - name: animalTypeByAnimalType
+    using:
+      foreign_key_constraint_on: animal_type
+- table:
+    schema: public
     name: feeds
   object_relationships:
   - name: author

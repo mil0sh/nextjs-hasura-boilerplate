@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v1.3.1.cli-migrations-v2
+FROM hasura/graphql-engine:v1.3.2.cli-migrations-v2
 
 # # Copy migrations directory
 COPY ./migrations /hasura-migrations
@@ -11,7 +11,7 @@ ENV HASURA_GRAPHQL_ENABLE_CONSOLE=true
 
 # Heroku hobby tier PG has few limitations including 20 max connections
 # https://devcenter.heroku.com/articles/heroku-postgres-plans#hobby-tier
-ENV HASURA_GRAPHQL_PG_CONNECTIONS=15
+ENV HASURA_GRAPHQL_PG_CONNECTIONS=20
 
 # https://github.com/hasura/graphql-engine/issues/4651#issuecomment-623414531
 ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default

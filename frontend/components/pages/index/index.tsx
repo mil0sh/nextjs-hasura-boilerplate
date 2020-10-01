@@ -32,7 +32,7 @@ const IndexPageComponent = () => {
               signIn();
             }}
           >
-            Create an account
+            Napravi nalog
           </Button>
         </Link>
       </Box>
@@ -53,7 +53,7 @@ const IndexPageComponent = () => {
               signOut();
             }}
           >
-            Sign Out
+            Odjava
           </Button>
         </Link>
       </Box>
@@ -69,11 +69,9 @@ const IndexPageComponent = () => {
         color={color[colorMode]}
       >
         <Stack spacing={4} maxW="xl" mx="auto">
-          <Heading textAlign="center">Nextjs Hasura Boilerplate</Heading>
+          <Heading textAlign="center">Vet Planet App</Heading>
           <Text fontSize="xl" lineHeight="tall" textAlign="center">
-            Boilerplate for building applications using Hasura and Next.js. This
-            demo application has been built using Chakra UI, NextAuth.js and
-            urql.
+            Kartoteka
           </Text>
           <Box>
             <Stack isInline align="center" justifyContent="center">
