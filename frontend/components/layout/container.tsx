@@ -13,7 +13,7 @@ const Container: FC = ({ children }) => {
       fontSize="sm"
       bg={bgColor[colorMode]}
     >
-      <Box maxW="xl" mx="auto">
+      <Box maxW="4xl" mx="auto">
         {children}
       </Box>
     </Box>

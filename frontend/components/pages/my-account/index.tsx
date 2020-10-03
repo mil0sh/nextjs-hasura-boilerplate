@@ -121,7 +121,6 @@ const MyAccountPageComponent = () => {
     <Stack spacing={4}>
       <Heading color={color[colorMode]}>Moj Profil</Heading>
       {errorNode()}
-      <Text>{session.user.name}</Text>
       <Grid templateColumns="repeat(1, 1fr)" gap={4}>
         <Box
           p={4}

@@ -33,20 +33,30 @@ const Navbar: NextComponentType = () => {
 
   const linksForAuthenticatedUsers = [
     {
-      id: "feeds",
-      label: "Feeds",
-      href: "/feeds",
+      id: "patients",
+      label: "Pacijenti",
+      href: "/patients",
     },
     {
-      id: "breeds",
-      label: "Rase",
-      href: "/breeds",
+      id: "owners",
+      label: "Vlasnici",
+      href: "/owners",
     },
     {
-      id: "myAccount",
-      label: "Moj Profil",
-      href: "/my-account",
+      id: "examinations",
+      label: "Pregledi",
+      href: "/examinations",
     },
+    // {
+    //   id: "feeds",
+    //   label: "Feeds",
+    //   href: "/feeds",
+    // },
+    // {
+    //   id: "breeds",
+    //   label: "Rase",
+    //   href: "/breeds",
+    // },
   ];
 
   const signInButtonNode = () => {
@@ -93,19 +103,30 @@ const Navbar: NextComponentType = () => {
 
   const themeToggleButtonNode = () => {
     return (
-      <IconButton
-        aria-label="Toggle theme"
-        fontSize="20px"
-        icon={colorMode === "dark" ? "sun" : "moon"}
-        onClick={handleToggleTheme}
-      />
+      <Stack isInline>
+        <IconButton
+          aria-label="Toggle theme"
+          fontSize="20px"
+          icon={colorMode === "dark" ? "sun" : "moon"}
+          onClick={handleToggleTheme}
+        />
+        <Box>
+          <Link href="/my-account">
+            <IconButton
+              aria-label="Toggle theme"
+              fontSize="20px"
+              icon="settings"
+            />
+          </Link>
+        </Box>
+      </Stack>
     );
   };
 
   return (
     <Box bg={bgColor[colorMode]}>
       <Box p={4} color={color[colorMode]} shadow="lg" pos="relative">
-        <Box maxW="xl" mx="auto" w="full">
+        <Box maxW="100" mx="auto" w="full">
           <Stack
             isInline
             spacing={4}
@@ -115,7 +136,7 @@ const Navbar: NextComponentType = () => {
           >
             <Box>
               <Stack isInline spacing={4} align="center" fontWeight="semibold">
-                {linksForAllUsers.map((link) => {
+                {/* {linksForAllUsers.map((link) => {
                   return (
                     <Box key={link.id}>
                       <Link href={link.href}>
@@ -123,7 +144,7 @@ const Navbar: NextComponentType = () => {
                       </Link>
                     </Box>
                   );
-                })}
+                })} */}
                 {session &&
                   linksForAuthenticatedUsers.map((link) => {
                     return (
@@ -138,7 +159,7 @@ const Navbar: NextComponentType = () => {
             </Box>
             <Box>
               <Stack isInline spacing={4} align="center">
-                {themeToggleButtonNode()}
+                {/* {themeToggleButtonNode()} */}
                 {signInButtonNode()}
                 {signOutButtonNode()}
               </Stack>

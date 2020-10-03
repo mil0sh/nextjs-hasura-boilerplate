@@ -12,6 +12,13 @@
         table:
           schema: public
           name: breeds
+  - name: patients
+    using:
+      foreign_key_constraint_on:
+        column: animal_type
+        table:
+          schema: public
+          name: patients
 - table:
     schema: public
     name: breeds
@@ -19,6 +26,14 @@
   - name: animalTypeByAnimalType
     using:
       foreign_key_constraint_on: animal_type
+  array_relationships:
+  - name: patients
+    using:
+      foreign_key_constraint_on:
+        column: id
+        table:
+          schema: public
+          name: patients
 - table:
     schema: public
     name: feeds
@@ -51,6 +66,44 @@
       filter:
         author_id:
           _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: gender
+  array_relationships:
+  - name: patients
+    using:
+      foreign_key_constraint_on:
+        column: gender
+        table:
+          schema: public
+          name: patients
+- table:
+    schema: public
+    name: owners
+  array_relationships:
+  - name: patients
+    using:
+      foreign_key_constraint_on:
+        column: owner
+        table:
+          schema: public
+          name: patients
+- table:
+    schema: public
+    name: patients
+  object_relationships:
+  - name: animalTypeByAnimalType
+    using:
+      foreign_key_constraint_on: animal_type
+  - name: breedById
+    using:
+      foreign_key_constraint_on: id
+  - name: genderByGender
+    using:
+      foreign_key_constraint_on: gender
+  - name: ownerByOwner
+    using:
+      foreign_key_constraint_on: owner
 - table:
     schema: public
     name: sessions

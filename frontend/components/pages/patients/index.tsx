@@ -2,25 +2,53 @@ import React from "react";
 import gql from "graphql-tag";
 import { useSubscription } from "urql";
 import { Box, Text, Stack, Skeleton, useColorMode } from "@chakra-ui/core";
-import IBreed from "types/breed";
-import Breed from "components/pages/breeds/breed";
+// import IBreed from "types/breed";
+import Patient from "components/pages/patients/patient";
 // import AddNewFeedForm from "components/pages/feeds/add-new-feed-form";
 
-const breedsSubscription = gql`
-  subscription fetchBreeds {
-    breeds(order_by: { name: asc }) {
+const patientSubscription = gql`
+  subscription fetchPatient {
+    patients {
       id
       name
-      original_name
-      category
-      official_id
+      birthday
+      gender {
+        id
+        name
+      }
+      dead
+      breed {
+        name
+      }
+      owner {
+        id
+        firstname
+        lastname
+        email
+        jmbg
+        note
+        phones {
+          name
+          number
+        }
+        address {
+          street
+          houseNumber
+          entrance
+          apartmentNumber
+          district
+          postalCode
+          city
+          country
+        }
+      }
     }
   }
 `;
 
-const BreedsPageComponent = () => {
+const PatientsPageComponent = () => {
   const [result] = useSubscription({
-    query: breedsSubscription,
+    query: patientSubscription,
   });
   const { colorMode } = useColorMode();
   const bgColor = { light: "white", dark: "gray.800" };
@@ -45,10 +73,10 @@ const BreedsPageComponent = () => {
 
   return (
     <Stack spacing={8}>
-      {result.data.breeds.map((breed: IBreed) => {
+      {result.data.patients.map((patient) => {
         return (
-          <Box key={breed.id}>
-            <Breed breed={breed} />
+          <Box key={patient.id}>
+            <Patient patient={patient} />
           </Box>
         );
       })}
@@ -56,4 +84,4 @@ const BreedsPageComponent = () => {
   );
 };
 
-export default BreedsPageComponent;
+export default PatientsPageComponent;
