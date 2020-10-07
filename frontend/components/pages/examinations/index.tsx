@@ -19,7 +19,7 @@ const examinationsSubscription = gql`
         name
         dead
         date_of_death
-        animalType {
+        animalTypeByAnimalType {
           name
         }
         breed {

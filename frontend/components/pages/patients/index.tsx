@@ -5,6 +5,7 @@ import { Box, Text, Stack, Skeleton, useColorMode } from "@chakra-ui/core";
 // import IBreed from "types/breed";
 import Patient from "components/pages/patients/patient";
 // import AddNewFeedForm from "components/pages/feeds/add-new-feed-form";
+import { useRouter } from "next/router";
 
 const patientSubscription = gql`
   subscription fetchPatient {
@@ -28,6 +29,7 @@ const patientSubscription = gql`
         jmbg
         note
         phones {
+          id
           name
           number
         }
@@ -40,6 +42,8 @@ const patientSubscription = gql`
           postalCode
           city
           country
+          latitude
+          longitude
         }
       }
     }
@@ -47,6 +51,10 @@ const patientSubscription = gql`
 `;
 
 const PatientsPageComponent = () => {
+  const router = useRouter();
+  const { pid } = router.query;
+  console.log(pid);
+
   const [result] = useSubscription({
     query: patientSubscription,
   });

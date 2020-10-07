@@ -89,6 +89,7 @@ const Navbar: NextComponentType = () => {
       <Box>
         <Link href="/api/auth/signout">
           <Button
+            variantColor="red"
             onClick={(e) => {
               e.preventDefault();
               signOut();
